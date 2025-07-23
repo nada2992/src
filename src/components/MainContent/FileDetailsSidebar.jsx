@@ -20,11 +20,11 @@ const FileDetailsSidebar = ({ file, onClose }) => {
   };
 
   return (
-    <div>
+    <div className="text-gray-800 dark:text-white">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold">File Details</h3>
         <button onClick={onClose}>
-          <FaTimes className="text-gray-600" />
+          <FaTimes />
         </button>
       </div>
 
@@ -33,11 +33,19 @@ const FileDetailsSidebar = ({ file, onClose }) => {
         <span className="font-medium">{file.name}</span>
       </div>
 
-      <div className="text-sm text-gray-700 space-y-2">
-        <p><strong>Type:</strong> {file.type}</p>
-        <p><strong>Owner:</strong> {file.owner}</p>
-        <p><strong>Modified:</strong> {file.modified}</p>
-        <p><strong>Size:</strong> {file.size || "—"}</p>
+      <div className="text-sm space-y-2">
+        <p>
+          <strong>Type:</strong> {file.type}
+        </p>
+        <p>
+          <strong>Owner:</strong> {file.owner}
+        </p>
+        <p>
+          <strong>Modified:</strong> {file.modified}
+        </p>
+        <p>
+          <strong>Size:</strong> {file.size || "—"}
+        </p>
       </div>
     </div>
   );
