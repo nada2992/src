@@ -1,36 +1,28 @@
-// ThemeToggle.jsx
-import { useState, useCallback, useEffect } from "react";
 import { BsSun, BsMoon } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const ThemeToggle = () => {
-  const getInitialTheme = () => localStorage.getItem("theme") || "light";
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [isDark, setIsDark] = useState(() => {
+    return document.documentElement.classList.contains("dark");
+  });
 
-  const applyTheme = (newTheme) => {
-    const html = document.documentElement;
-    html.classList.remove("light", "dark");
-    html.classList.add(newTheme);
-  };
-
-  const handleToggle = useCallback(() => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
+  const toggleTheme = () => {
+    const newTheme = isDark ? "light" : "dark";
     localStorage.setItem("theme", newTheme);
-  }, [theme]);
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(newTheme);
+    setIsDark(!isDark);
+  };
 
   return (
     <button
-      onClick={handleToggle}
+      onClick={toggleTheme}
       aria-label="Toggle dark mode"
-      aria-pressed={theme === "dark"}
+      aria-pressed={isDark}
       className="focus:outline-none"
       type="button"
     >
-      {theme === "dark" ? (
+      {isDark ? (
         <BsSun size={20} className="text-yellow-400" />
       ) : (
         <BsMoon size={20} className="text-gray-700 dark:text-gray-200" />
